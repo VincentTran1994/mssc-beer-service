@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.UUID;
 
@@ -36,9 +37,9 @@ class BeerControllerTest {
         BeerDto beerDto = new BeerDto();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-        mockMvc.perform(post("/api/v1/beer/")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(beerDtoJson))
+        mockMvc.perform(post("/api/v1/beer")
+                        .content(beerDtoJson)
+                        .accept(MediaType.APPLICATION_JSON))
                         .andExpect(status().isCreated());
     }
 
